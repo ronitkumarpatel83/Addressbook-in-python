@@ -93,3 +93,6 @@ class AddressBook:
                 self.addressbook.remove(record)
                 print("\nRecord Deleted Successfully")
             return self.addressbook
+
+    def add_multiple_person(self):
+        pass

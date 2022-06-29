@@ -9,20 +9,23 @@ if __name__ == "__main__":
     try:
         dict_person = {}
         while True:
-            print("\n1. Add a new Record\n2. Update record\n3. Delete record\n0. Exit")
+            print("\n1. Add a new Record\n2. Update record\n3. Delete record\n4. Display records\n0. Exit")
             ch = int(input("\nEnter your choice : "))
             if ch == 1:
-                first_name = input("\nEnter your First Name : ")
-                last_name = input("Enter your Last Name : ")
-                address = input("Enter your Address : ")
-                city = input("Enter your City Name : ")
-                state = input("Enter your State Name : ")
-                pincode = int(input("Enter your Pincode : "))
-                phone_number = int(input("Enter your Phone Number : "))
-                email = input("Enter your Email : ")
-                dict_person = {"First Name": first_name, "Last Name": last_name, "Address": address, "City": city,
-                               "State": state, "Pincode": pincode, "Phone Number": phone_number, "Email": email}
-                records.add_person(dict_person)
+                num = int(input("How many contacts you want to add in address book : "))
+                for i in range(num):
+                    print(f"\nEnter details for contact {i + 1} : \n ")
+                    first_name = input("\nEnter your First Name : ")
+                    last_name = input("Enter your Last Name : ")
+                    address = input("Enter your Address : ")
+                    city = input("Enter your City Name : ")
+                    state = input("Enter your State Name : ")
+                    pincode = int(input("Enter your Pincode : "))
+                    phone_number = int(input("Enter your Phone Number : "))
+                    email = input("Enter your Email : ")
+                    dict_person = {"First Name": first_name, "Last Name": last_name, "Address": address, "City": city,
+                                   "State": state, "Pincode": pincode, "Phone Number": phone_number, "Email": email}
+                    records.add_person(dict_person)
                 records.display_person()
             elif ch == 2:
                 old_fname = input("\nEnter your First Name : ")
@@ -46,6 +49,8 @@ if __name__ == "__main__":
                 fname = input("Enter first name : ")
                 records.delete_record(fname)
                 records.display_person()
+            elif ch == 4:
+                records.display_person()
             elif ch == 0:
                 break
             else:
@@ -53,3 +58,4 @@ if __name__ == "__main__":
     except Exception as e:
         print(e)
         logging.exception(e)
+
