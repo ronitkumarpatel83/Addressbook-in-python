@@ -15,13 +15,12 @@ logging.debug("Address Book Program running................")
 
 
 class CreateContacts:
-    def __init__(self, first_name, last_name, address, city, state, pincode,
-                 phone_number, email):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.address = address
-        self.city = city
-        self.state = state
-        self.pincode = pincode
-        self.phone_number = phone_number
-        self.email = email
+    def __init__(self, book_dict):
+        self.first_name = book_dict.get("first_name")
+        self.last_name = book_dict.get("last_name")
+        self.address = book_dict.get("address")
+        self.city = book_dict.get("city")
+        self.state = book_dict.get("state")
+        self.pincode = book_dict.get("pincode")
+        self.phone_number = book_dict.get("phone_number")
+        self.email = book_dict.get("email")
