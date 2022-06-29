@@ -1,45 +1,48 @@
-"""
-    @Name = Ronit kumar Patel
-    @Title = Address book
-"""
-import logging
-
-print("********************************************************************************")
-print("<<<<<<<<<<<<----- Welcome to Address Book Program----->>>>>>>>>>>>> ")
-print("********************************************************************************")
-
-log = '%(lineno)d ** %(asctime)s ** %(message)s'
-logging.basicConfig(filename='addressbook.log', filemode='a', format=log, level=logging.DEBUG)
-
-logging.debug("Address Book Program running................")
+from createcontacts import CreateContacts
 
 
-class CreateContacts:
-    def __init__(self, first_name, last_name, address, city, state, pincode, phone_number, email):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.address = address
-        self.city = city
-        self.state = state
-        self.pincode = pincode
-        self.phone_number = phone_number
-        self.email = email
+class AddressBook:
+    addressbook = []
 
-    def person_input(self):
+    def add_person(self, dict_person):
         """
         Description:
-            This function is getting details from user and store it in variables
-        Parameter:
-            It takes one self argument
-        Return:
-            returns tuple of all details
+            This function is getting details from user input and store it in list
+        parameter :
+            first_name, last_name, address, city, state, pincode, phone_number, email
+        return:
+            return list of addressbook
         """
-        self.first_name = input("Enter your First Name : ")
-        self.last_name = input("Enter your Last Name : ")
-        self.address = input("Enter your Address : ")
-        self.city = input("Enter your City Name : ")
-        self.state = input("Enter your State Name : ")
-        self.pincode = int(input("Enter your Zip Code : "))
-        self.phone_number = input("Enter your Phone Number : ")
-        self.email = input("Enter your Email Address: ")
-        return self.first_name, self.last_name, self.address, self.city, self.state, self.pincode, self.phone_number, self.email
+        fname = dict_person.get("First Name")
+        lname = dict_person.get("Last Name")
+        address = dict_person.get("Address")
+        city = dict_person.get("City")
+        state = dict_person.get("State")
+        pincode = dict_person.get("Pincode")
+        phone_number = dict_person.get("Phone Number")
+        email = dict_person.get("Email")
+        add = CreateContacts(first_name=fname, last_name=lname, address=address, city=city, state=state,
+                             pincode=pincode, phone_number=phone_number, email=email)
+
+        self.addressbook.append(add)
+        return self.addressbook
+
+    def display_person(self):
+        """
+        Description:
+            This function is printing address book person details
+        :return:
+        """
+        i = 1
+        print("Contact details present in Address Book : ")
+        for detail in self.addressbook:
+            print(f"\nRecord - {i}")
+            print(f"First name : {detail.first_name}")
+            print(f"Last name : {detail.last_name}")
+            print(f"Address : {detail.address}")
+            print(f"City : {detail.city}")
+            print(f"State : {detail.state}")
+            print(f"Pincode : {detail.pincode}")
+            print(f"Phone Number : {detail.phone_number}")
+            print(f"Email : {detail.email}")
+            i += 1
