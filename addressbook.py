@@ -78,3 +78,18 @@ class AddressBook:
                 record.email = dict_person.get("Email")
                 print("\nRecord Updated Successfully !!")
         return self.addressbook
+
+    def delete_record(self,first_name):
+        """
+        Description:
+            This function is deleting address book records
+        Parameter:
+            It takes self and first name as argument
+        Return:
+            returns list of records
+        """
+        for record in self.addressbook:
+            if record.first_name == first_name:
+                self.addressbook.remove(record)
+                print("\nRecord Deleted Successfully")
+            return self.addressbook

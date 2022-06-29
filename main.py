@@ -9,7 +9,7 @@ if __name__ == "__main__":
     try:
         dict_person = {}
         while True:
-            print("\n1. Add a new Record\n2. Update record\n0. Exit")
+            print("\n1. Add a new Record\n2. Update record\n3. Delete record\n0. Exit")
             ch = int(input("\nEnter your choice : "))
             if ch == 1:
                 first_name = input("\nEnter your First Name : ")
@@ -42,6 +42,10 @@ if __name__ == "__main__":
                     records.display_person()
                 else:
                     print("Record Not Found!!")
+            elif ch == 3:
+                fname = input("Enter first name : ")
+                records.delete_record(fname)
+                records.display_person()
             elif ch == 0:
                 break
             else:
