@@ -1,61 +1,109 @@
+"""
+    @Name = Ronit kumar Patel
+    @Title = Address book
+"""
+import logging
 from addressbook import AddressBook
-from createcontacts import logging
+from contact import Contact
+
+log = '%(lineno)d ** %(asctime)s ** %(message)s'
+logging.basicConfig(filename='address_book.log', filemode='a', format=log, level=logging.DEBUG)
+
+logging.debug("Address Book Program running................")
 
 
-if __name__ == "__main__":
-    print("\nWelcome to Address Book System")
+def create_addressbook():
+    book = input("Enter addressbook name : ")
+    book_obj = AddressBook(book)
+    addressbook_dict.update({book_obj.ab_name: book_obj})
+    return addressbook_dict
 
-    records = AddressBook()
+
+def display_list_of_addressbook():
+    print(addressbook_dict)
+
+
+def add_person():
+    book = input("Enter addressbook name : ")
+    book_obj = addressbook_dict.get(book)
+    if book_obj is None:
+        book_obj = AddressBook(book)
+        addressbook_dict.update({book_obj.ab_name: book_obj})
+    first_name = input("\nEnter your First Name : ")
+    last_name = input("Enter your Last Name : ")
+    address = input("Enter your Address : ")
+    city = input("Enter your City Name : ")
+    state = input("Enter your State Name : ")
+    pincode = input("Enter your Zip Code : ")
+    phone_number = input("Enter your Phone Number : ")
+    email = input("Enter your Email : ")
+    dict_person = {"first_name": first_name, "last_name": last_name, "address": address, "city": city,
+                   "state": state, "pincode": pincode, "phone_number": phone_number, "email": email}
+    contact_obj = Contact(dict_person)
+    book_obj.add_contact(contact_obj=contact_obj)
+
+
+def display_person():
+    book = input("Enter addressbook name : ")
+    book_obj = addressbook_dict.get(book)
+    if book_obj is None:
+        print("Addressbook doesn't exit")
+        return
+    book_obj.display_person()
+
+
+def update_person():
+    book = input("Enter addressbook name : ")
+    book_obj = addressbook_dict.get(book)
+    if book_obj is None:
+        book_obj = AddressBook(book)
+        addressbook_dict.update({book_obj.ab_name: book_obj})
+    first_name = input("\nEnter your First Name : ")
+    last_name = input("Enter your Last Name : ")
+    address = input("Enter your Address : ")
+    city = input("Enter your City Name : ")
+    state = input("Enter your State Name : ")
+    pincode = input("Enter your Zip Code : ")
+    phone_number = input("Enter your Phone Number : ")
+    email = input("Enter your Email : ")
+    dict_person = {"First Name": first_name, "Last Name": last_name, "Address": address, "City": city,
+                   "State": state, "Pincode": pincode, "Phone Number": phone_number, "Email": email}
+    contact_obj = Contact(dict_person)
+    book_obj.update_person(contact_obj=contact_obj)
+
+
+def delete_person():
+    book = input("Enter addressbook name : ")
+    book_obj = addressbook_dict.get(book)
+    if book_obj is None:
+        print("Addressbook doesn't exit")
+        return
+    person_name = input("Enter person name : ")
+    book_obj.delete_person(person_name)
+
+
+if __name__ == '__main__':
+    print("********************************************************************************")
+    print("<<<<<<<<<<<<----- Welcome to Address Book Program----->>>>>>>>>>>>> ")
+    print("********************************************************************************")
+    addressbook_dict = {}
     try:
-        dict_person = {}
         while True:
-            print("\n1. Add a new Record\n2. Update record\n3. Delete record\n4. Display records\n0. Exit")
-            ch = int(input("\nEnter your choice : "))
-            if ch == 1:
-                num = int(input("How many contacts you want to add in address book : "))
-                for i in range(num):
-                    print(f"\nEnter details for contact {i + 1} : \n ")
-                    first_name = input("\nEnter your First Name : ")
-                    last_name = input("Enter your Last Name : ")
-                    address = input("Enter your Address : ")
-                    city = input("Enter your City Name : ")
-                    state = input("Enter your State Name : ")
-                    pincode = int(input("Enter your Pincode : "))
-                    phone_number = int(input("Enter your Phone Number : "))
-                    email = input("Enter your Email : ")
-                    dict_person = {"First Name": first_name, "Last Name": last_name, "Address": address, "City": city,
-                                   "State": state, "Pincode": pincode, "Phone Number": phone_number, "Email": email}
-                    records.add_person(dict_person)
-                records.display_person()
-            elif ch == 2:
-                old_fname = input("\nEnter your First Name : ")
-                check = records.find_person(old_fname)
-                if check:
-                    first_name = input("\nEnter your new First Name : ")
-                    last_name = input("Enter your new Last Name : ")
-                    address = input("Enter your new Address : ")
-                    city = input("Enter your new City Name : ")
-                    state = input("Enter your new State Name : ")
-                    pincode = input("Enter your new Zip Code : ")
-                    phone_number = input("Enter your new Phone Number : ")
-                    email = input("Enter your new Email : ")
-                    dict_person = {"First Name": first_name, "Last Name": last_name, "Address": address, "City": city,
-                                   "State": state, "Pincode": pincode, "Phone Number": phone_number, "Email": email}
-                    records.update_records(old_fname,dict_person)
-                    records.display_person()
-                else:
-                    print("Record Not Found!!")
-            elif ch == 3:
-                fname = input("Enter first name : ")
-                records.delete_record(fname)
-                records.display_person()
-            elif ch == 4:
-                records.display_person()
-            elif ch == 0:
+            print("1.Create AddressBook \n2.Display list of Addressbook\n3.Add Person\n4.Display persons record"
+                  "\n5.Update person record \n6.Delete person\n0.Exit")
+            switcher = {
+                1: create_addressbook,
+                2: display_list_of_addressbook,
+                3: add_person,
+                4: display_person,
+                5: update_person,
+                6: delete_person
+            }
+            a = int(input("Enter your choice : "))
+            if a == 0:
                 break
-            else:
-                print("Choice is invalid")
+            switcher.get(a)()
+
     except Exception as e:
         print(e)
         logging.exception(e)
-
