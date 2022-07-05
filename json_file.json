@@ -1,0 +1,27 @@
+{
+    "tcs": {
+        "name": "tcs",
+        "records": {
+            "Ronit": {
+                "first_name": "Ronit",
+                "last_name": "Patel",
+                "address": "rld",
+                "city": "sng",
+                "state": "odisha",
+                "pincode": "770001",
+                "phone_number": "1236547890",
+                "email": "ronitkumarpatel@gmail.com"
+            },
+            "Abhi": {
+                "first_name": "Abhi",
+                "last_name": "Meher",
+                "address": "ptg",
+                "city": "blngr",
+                "state": "odisha",
+                "pincode": "236402",
+                "phone_number": "7531598524",
+                "email": "abhlamrh@gmail.com"
+            }
+        }
+    }
+}
